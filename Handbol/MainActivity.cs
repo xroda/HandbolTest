@@ -8,8 +8,8 @@ namespace Handbol
     [Activity(Label = "Handbol", MainLauncher = true, Icon = "@mipmap/icon")]
     public class MainActivity : Activity
     {
-        int count = 1;
         Match CurrentMatch;
+        long timeWhenStopped = 0;
 
         string ResultPart1Property { get; set; }
 
@@ -56,7 +56,8 @@ namespace Handbol
 
             #endregion
 
-            #region Chronograph
+            #region Chronometer
+
             Button btnTimerPlay = FindViewById<Button>(Resource.Id.btnTimerPlay);
             btnTimerPlay.Click += BtnTimerPlay_clicked;
 
@@ -65,6 +66,7 @@ namespace Handbol
 
             Button btnTimerReset = FindViewById<Button>(Resource.Id.btnTimerReset);
             btnTimerReset.Click += BtnTimerReset_clicked;
+
             #endregion
 
             Button btnResetAll = FindViewById<Button>(Resource.Id.btnResetAll);
@@ -77,24 +79,28 @@ namespace Handbol
         {
             CurrentMatch.CurrentPart = 1;
             SetCurrentPartMoreVisible();
+            TimerReset();
         }
 
         private void BtnPart2_clicked(object sender, EventArgs e)
         {
             CurrentMatch.CurrentPart = 2;
             SetCurrentPartMoreVisible();
+            TimerReset();
         }
 
         private void BtnPart3_clicked(object sender, EventArgs e)
         {
             CurrentMatch.CurrentPart = 3;
             SetCurrentPartMoreVisible();
+            TimerReset();
         }
 
         private void BtnPart4_clicked(object sender, EventArgs e)
         {
             CurrentMatch.CurrentPart = 4;
             SetCurrentPartMoreVisible();
+            TimerReset();
         }
 
         #endregion
@@ -136,30 +142,42 @@ namespace Handbol
         #region Eventhandlers for chrono
         private void BtnTimerPlay_clicked(object sender, EventArgs e)
         {
-            Chronometer chrono = FindViewById<Chronometer>(Resource.Id.chronometer);
+            Chronometer chrono = FindViewById<Chronometer>(Resource.Id.chronoHelper);
+            chrono.Base = SystemClock.ElapsedRealtime() + timeWhenStopped;
             chrono.Start();
         }
 
         private void BtnTimerPause_clicked(object sender, EventArgs e)
         {
-            Chronometer chrono = FindViewById<Chronometer>(Resource.Id.chronometer);
-            chrono.Start();
+            Chronometer chrono = FindViewById<Chronometer>(Resource.Id.chronoHelper);
+            timeWhenStopped = chrono.Base - SystemClock.ElapsedRealtime();
+            chrono.Stop();
         }
 
         private void BtnTimerReset_clicked(object sender, EventArgs e)
         {
-            Chronometer chrono = FindViewById<Chronometer>(Resource.Id.chronometer);
-            chrono.StopNestedScroll();
+            TimerReset();
+        }
+
+        private void TimerReset()
+        {
+            Chronometer chrono = FindViewById<Chronometer>(Resource.Id.chronoHelper);
+            chrono.Stop();
+            chrono.Base = SystemClock.ElapsedRealtime();
+            timeWhenStopped = 0;
         }
         #endregion
 
-        
+
         private void BtnResetAll_clicked(object sender, EventArgs e)
         {
             CurrentMatch.CurrentPart = 1;
             CurrentMatch.ResetAllValues();
             SetCurrentPartMoreVisible();
             UpdateMarkers();
+            TimerReset();
+
+
         }
 
         private void SetCurrentPartMoreVisible() {

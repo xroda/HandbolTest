@@ -81,7 +81,7 @@ namespace Handbol
 			public const int btnTimerReset = 2131034120;
 			
 			// aapt resource value: 0x7f050009
-			public const int chronometer = 2131034121;
+			public const int chronoHelper = 2131034121;
 			
 			// aapt resource value: 0x7f050000
 			public const int gridLayout1 = 2131034112;
