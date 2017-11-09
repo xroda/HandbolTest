@@ -1,10 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
-              android:orientation="vertical" 
-              android:layout_width="match_parent" 
-              android:layout_height="match_parent">
-  <Button android:id="@+id/myButton" 
-          android:layout_width="match_parent" 
-          android:layout_height="wrap_content" 
-          android:text="@string/hello" />
-</LinearLayout>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/gridLayout1"
+    android:layout_marginBottom="0.0dp"
+    android:rowCount="10"
+    android:columnCount="4">
+    <TextView
+        android:layout_row="0"
+        android:layout_column="0"
+        android:layout_columnSpan="4"
+        android:text="@string/txtPart"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/textView1" />
+    <Button
+        android:id="@+id/btnPart1"
+        android:layout_row="1"
+        android:layout_column="0"
+        android:text="1" />
+    <Button
+        android:id="@+id/btnPart2"
+        android:layout_row="1"
+        android:layout_column="1"
+        android:text="2" />
+    <Button
+        android:id="@+id/btnPart3"
+        android:layout_row="1"
+        android:layout_column="2"
+        android:text="3" />
+    <Button
+        android:id="@+id/btnPart4"
+        android:layout_row="1"
+        android:layout_column="3"
+        android:text="4" />
+    <Button
+        android:id="@+id/btnTimerPlay"
+        android:layout_row="2"
+        android:layout_column="0"
+        android:text="Play"
+        android:backgroundTint="green" />
+    <Button
+        android:id="@+id/btnTimerPause"
+        android:layout_row="2"
+        android:layout_column="1"
+        android:text="Pause" />
+    <Button
+        android:id="@+id/btnTimerReset"
+        android:layout_row="2"
+        android:layout_column="2"
+        android:text="Reset" />
+    <Button
+        android:layout_row="9"
+        android:layout_column="0"
+        android:layout_columnSpan="4"
+        android:id="@+id/myButton"
+        android:text="@string/hello" />
+</GridLayout>
