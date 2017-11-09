@@ -158,7 +158,8 @@ namespace Handbol
         {
             CurrentMatch.CurrentPart = 1;
             CurrentMatch.ResetAllValues();
-
+            SetCurrentPartMoreVisible();
+            UpdateMarkers();
         }
 
         private void SetCurrentPartMoreVisible() {
