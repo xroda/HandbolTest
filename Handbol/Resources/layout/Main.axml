@@ -2,58 +2,98 @@
 <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:id="@+id/gridLayout1"
     android:layout_marginBottom="0.0dp"
-    android:rowCount="10"
-    android:columnCount="4">
+    android:rowCount="12"
+    android:columnCount="4"
+    tools:gridSpec="1|12|#0093eeff|K:#ee8700ff:16,l:72,l:16,r|S:#83ee00ff:16,0,l:16,56,l:16,0,r"
+    tools:actionBarNavMode="list">
     <TextView
-        android:layout_row="0"
-        android:layout_column="0"
         android:layout_columnSpan="4"
         android:text="@string/txtPart"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:id="@+id/textView1" />
     <Button
         android:id="@+id/btnPart1"
-        android:layout_row="1"
-        android:layout_column="0"
         android:text="1" />
     <Button
         android:id="@+id/btnPart2"
-        android:layout_row="1"
-        android:layout_column="1"
         android:text="2" />
     <Button
         android:id="@+id/btnPart3"
-        android:layout_row="1"
-        android:layout_column="2"
         android:text="3" />
     <Button
         android:id="@+id/btnPart4"
-        android:layout_row="1"
-        android:layout_column="3"
         android:text="4" />
     <Button
         android:id="@+id/btnTimerPlay"
-        android:layout_row="2"
-        android:layout_column="0"
         android:text="Play"
-        android:backgroundTint="green" />
+        android:background="@android:color/holo_green_dark" />
     <Button
         android:id="@+id/btnTimerPause"
-        android:layout_row="2"
-        android:layout_column="1"
-        android:text="Pause" />
+        android:text="Pause"
+        android:background="@android:color/holo_blue_dark" />
     <Button
         android:id="@+id/btnTimerReset"
-        android:layout_row="2"
-        android:layout_column="2"
-        android:text="Reset" />
+        android:text="Reset"
+        android:background="@android:color/holo_red_dark" />
+    <Chronometer
+        android:id="@+id/chronometer"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        android:layout_marginRight="16.0dp" />
     <Button
-        android:layout_row="9"
-        android:layout_column="0"
+        android:id="@+id/btnGoalAddToLocal"
+        android:layout_columnSpan="2"
+        android:layout_gravity="fill"
+        android:text="Local + 1"
+        android:padding="45dp" />
+    <Button
+        android:id="@+id/btnGoalAddToVisitor"
+        android:layout_columnSpan="2"
+        android:layout_gravity="fill"
+        android:text="Visitor + 1" />
+    <Button
+        android:id="@+id/btnGoalDecreaseToLocal"
+        android:layout_columnSpan="2"
+        android:text="Local - 1"
+        android:layout_gravity="fill" />
+    <Button
+        android:id="@+id/btnGoalDecreaseToVisitor"
+        android:layout_columnSpan="2"
+        android:text="Visitor - 1"
+        android:layout_gravity="fill" />
+    <TextView
         android:layout_columnSpan="4"
-        android:id="@+id/myButton"
-        android:text="@string/hello" />
+        android:text="Q1: 0 - 0"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/txtResultPart1" />
+    <TextView
+        android:text="Q2: 0 - 0"
+        android:layout_columnSpan="4"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/txtResultPart2" />
+    <TextView
+        android:text="Q3: 0 - 0"
+        android:layout_columnSpan="4"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/txtResultPart3" />
+    <TextView
+        android:text="Q4: 0 - 0"
+        android:layout_columnSpan="4"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/txtResultPart4" />
+    <TextView
+        android:text="Final: 0 - 0"
+        android:layout_columnSpan="4"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/txtResultTotal" />
+    <Button
+        android:layout_columnSpan="4"
+        android:id="@+id/btnResetAll"
+        android:text="@string/btnResetAll"
+        android:layout_marginTop="19.0dp"
+        android:layout_gravity="fill_horizontal"
+        android:background="@android:color/holo_red_dark" />
 </GridLayout>
