@@ -97,4 +97,11 @@
         android:layout_marginTop="19.0dp"
         android:layout_gravity="fill_horizontal"
         android:background="@android:color/holo_red_dark" />
+    <TextView
+        android:text="Sound:"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/textView2" />
+    <ToggleButton
+        android:id="@+id/toggleSound"
+        android:checked="false" />
 </GridLayout>

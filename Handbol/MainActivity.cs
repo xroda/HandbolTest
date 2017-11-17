@@ -2,6 +2,7 @@
 using Android.Widget;
 using Android.OS;
 using System;
+using Android.Media;
 
 namespace Handbol
 {
@@ -10,6 +11,11 @@ namespace Handbol
     {
         Match CurrentMatch;
         long timeWhenStopped = 0;
+        bool userWantsSound = false;
+
+        enum SoundType {
+            Fail = 0, Success = 1, Error = 2
+        }
 
         string ResultPart1Property { get; set; }
 
@@ -72,6 +78,36 @@ namespace Handbol
             Button btnResetAll = FindViewById<Button>(Resource.Id.btnResetAll);
             btnResetAll.Click += BtnResetAll_clicked;
 
+            ToggleButton toggleSound = FindViewById<ToggleButton>(Resource.Id.toggleSound);
+            toggleSound.Click += ToggleSound_Click;
+
+        }
+
+        private void PlaySoud(SoundType whatSound) {
+            MediaPlayer _player;
+
+            switch (whatSound)
+            {
+                case SoundType.Fail:
+                    _player = MediaPlayer.Create(this, Resource.Raw.bad_trombon);
+                    _player.Start();
+                    break;
+                case SoundType.Success:
+                    _player = MediaPlayer.Create(this, Resource.Raw.good_applause);
+                    _player.Start();
+                    break;
+                case SoundType.Error:
+                    _player = MediaPlayer.Create(this, Resource.Raw.error_windows_error);
+                    _player.Start();
+                    break;
+            }
+
+        }
+
+        private void ToggleSound_Click(object sender, EventArgs e)
+        {
+            ToggleButton toggleSound = FindViewById<ToggleButton>(Resource.Id.toggleSound);
+            userWantsSound = toggleSound.Checked;
         }
 
         #region Parts Buttons eventhandlers
@@ -112,6 +148,8 @@ namespace Handbol
 
             UpdateMarkers();
 
+            if (userWantsSound) PlaySoud(SoundType.Success);
+
         }
 
         private void BtnGoalAddToVisitor_clicked(object sender, EventArgs e)
@@ -119,6 +157,8 @@ namespace Handbol
             CurrentMatch.AddGoalToVisitor();
 
             UpdateMarkers();
+
+            if (userWantsSound) PlaySoud(SoundType.Fail);
 
         }
 
@@ -128,6 +168,8 @@ namespace Handbol
 
             UpdateMarkers();
 
+            if (userWantsSound) PlaySoud(SoundType.Error);
+
         }
 
         private void BtnGoalDecreaseToVisitor_clicked(object sender, EventArgs e)
@@ -135,6 +177,8 @@ namespace Handbol
             CurrentMatch.DecreaseGoalToVisitor();
 
             UpdateMarkers();
+
+            if (userWantsSound) PlaySoud(SoundType.Error);
 
         }
         #endregion
