@@ -215,12 +215,24 @@ namespace Handbol
 
         private void BtnResetAll_clicked(object sender, EventArgs e)
         {
-            CurrentMatch.CurrentPart = 1;
-            CurrentMatch.ResetAllValues();
-            SetCurrentPartMoreVisible();
-            UpdateMarkers();
-            TimerReset();
+            AlertDialog.Builder confirmDialog = new AlertDialog.Builder(this);
+            confirmDialog.SetPositiveButton("Yes", (senderDialog, args) => {
+                CurrentMatch.CurrentPart = 1;
+                CurrentMatch.ResetAllValues();
+                SetCurrentPartMoreVisible();
+                UpdateMarkers();
+                TimerReset();
+            });
 
+            confirmDialog.SetNegativeButton("Nope!", (senderDialog, args) => {});
+
+            confirmDialog.SetTitle("Confirmation");
+            confirmDialog.SetMessage("Are you sure you want to reset all values?");
+
+            RunOnUiThread(() =>
+            {
+                confirmDialog.Show();
+            });
 
         }
 
@@ -236,23 +248,35 @@ namespace Handbol
             btnPart3.SetBackgroundColor(Android.Graphics.Color.Gray);
             btnPart4.SetBackgroundColor(Android.Graphics.Color.Gray);
 
+            TextView txtMarkerPart1 = FindViewById<TextView>(Resource.Id.txtResultPart1);
+            TextView txtMarkerPart2 = FindViewById<TextView>(Resource.Id.txtResultPart2);
+            TextView txtMarkerPart3 = FindViewById<TextView>(Resource.Id.txtResultPart3);
+            TextView txtMarkerPart4 = FindViewById<TextView>(Resource.Id.txtResultPart4);
+
+            txtMarkerPart1.SetTextSize(Android.Util.ComplexUnitType.Sp, 15);
+            txtMarkerPart2.SetTextSize(Android.Util.ComplexUnitType.Sp, 15);
+            txtMarkerPart3.SetTextSize(Android.Util.ComplexUnitType.Sp, 15);
+            txtMarkerPart4.SetTextSize(Android.Util.ComplexUnitType.Sp, 15);
+
             switch (CurrentMatch.CurrentPart)
             {
                 case 1:
                     btnPart1.SetBackgroundColor(Android.Graphics.Color.Green);
+                    txtMarkerPart1.SetTextSize(Android.Util.ComplexUnitType.Sp, 20);
                     break;
                 case 2:
                     btnPart2.SetBackgroundColor(Android.Graphics.Color.Green);
+                    txtMarkerPart2.SetTextSize(Android.Util.ComplexUnitType.Sp, 20);
                     break;
                 case 3:
                     btnPart3.SetBackgroundColor(Android.Graphics.Color.Green);
+                    txtMarkerPart3.SetTextSize(Android.Util.ComplexUnitType.Sp, 20);
                     break;
                 case 4:
                     btnPart4.SetBackgroundColor(Android.Graphics.Color.Green);
+                    txtMarkerPart4.SetTextSize(Android.Util.ComplexUnitType.Sp, 20);
                     break;
             }
-
-
 
         }
 
